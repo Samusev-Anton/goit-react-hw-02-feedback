@@ -1,6 +1,8 @@
 import React from "react";
 import Controls from "./Controls";
 import Statistics from "./Statistics";
+import Section from "./Section";
+import SectionStat from "./SectionStat";
 
 class Counter extends React.Component{
 state = {
@@ -12,40 +14,70 @@ state = {
     handleIncrement = (event) => {
         // console.dir(event.target.id) 
         const { id } = event.target;
-        if (id === '1') {
-                    this.setState (prevState=> {
-                        return {
-             good:prevState.good+1,
-         }
-        })
+        switch (id) {
+            case '1':
+                this.setState (prevState=> {
+                return {good:prevState.good+1}})
+                break;
+            case '2':
+                this.setState (prevState=> {
+                return {neutral:prevState.neutral+1}})
+                break;
+            case '3':
+                this.setState (prevState=> {
+                return {bad:prevState.bad+1}})
+                break;
+
+            default:
+         console.log('fignia');
         }
-                if (id === '2') {
-                    this.setState (prevState=> {
-                        return {
-             neutral:prevState.neutral+1,
-         }
-        })
-        }
-        if (id === '3') {
-                    this.setState (prevState=> {
-                        return {
-             bad:prevState.bad+1,
-         }
-        })
-        }
-        // const summary = this.state.good + this.state.neutral + this.state.bad+1;
-        // console.log(summary);
+    //     if (id === '1') {
+    //         this.setState(prevState => {
+    //             return {
+    //          good:prevState.good+1,
+    //      }
+    //     })        
+    //     }
+    //     if (id === '2') {
+    //         this.setState (prevState=> {
+    //         return {
+    //         neutral:prevState.neutral+1,
+    //      }
+    //     })
+    //     }
+    //     if (id === '3') {
+    //         this.setState (prevState=> {
+    //         return {
+    //          bad:prevState.bad+1,
+    //      }
+    //     })
+    //     }
+    }
+    countTotalFeedback = () => {
+        const { good, neutral, bad } = this.state;
+            return (good + neutral + bad);
+    }
+    
+    countPositiveFeedbackPercentage = () => {
+                const { good, bad } = this.state;
+        return (
+            Math.round((good / bad) * 100)
+)
     }
 
-    render() {
-        return (
-            <div className="counter">
-                <h1>Please leave feedBack</h1>
-                <Controls onIncrement={ this.handleIncrement} />
-                <h2>Statistix</h2>
-                <Statistics good={this.state.good} neutral={this.state.neutral} bad={this.state.bad} summary={this.state.good + this.state.neutral + this.state.bad} positive={Math.round((this.state.good / this.state.bad) * 100) } />
-                </div>
 
+    render() {
+                const { good, neutral, bad } = this.state;
+
+        return (
+            <>
+           <Section title="Please leave feedBack">
+                <Controls onIncrement={ this.handleIncrement} />
+           </Section>
+             <SectionStat title="Statistic" disable={this.countTotalFeedback()}>
+                <Statistics good={good} neutral={neutral} bad={bad} summary={this.countTotalFeedback()} positive={this.countPositiveFeedbackPercentage()} />
+         </SectionStat>
+</>
     )
 
     }

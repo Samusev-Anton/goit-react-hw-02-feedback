@@ -1,6 +1,7 @@
 import React from "react";
 
-const Statistics = ({good, neutral, bad, summary, positive}) => {
+const Statistics = ({ good, neutral, bad, summary, positive }) => {
+    // console.log(summary);
     return (
            <ul>
                     <li>Good:{good}</li>
