@@ -1,15 +1,17 @@
 import React from "react";
+import { Block, Title } from './Section.styled';
+
 
 const SectionStat = ({ title, children, disable }) => {
     // console.log(disable);
     return (<>{
         disable > 0 &&
     
-        <section>
-            <h2>{title}</h2>
+        <Block >
+            <Title>{title}</Title>
             {children}
-        </section>}
+        </Block >}
         </>
     )
 }
-export default SectionStat
+export default SectionStat;

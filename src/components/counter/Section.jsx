@@ -1,12 +1,12 @@
 import React from "react";
-// import { Block } from "./Section.styled";
+import { Block, Title } from './Section.styled';
 
 const Section = ({ title, children }) => {
     return (
-        <section>
-        <h2>{title}</h2>
+        <Block>
+        <Title>{title}</Title>
         {children}
-        </section>
+        </Block>
     )
 }
 export default Section
